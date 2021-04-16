@@ -2,7 +2,7 @@ from __future__ import print_function
 from __future__ import absolute_import
 import keras
 import tensorflow as tf
-import keras.backend as K
+from keras import backend as K
 
 import backbone
 weight_decay = 1e-4
@@ -84,7 +84,7 @@ def vggvox_resnet2d_icassp(input_dim=(257, 250, 1), num_class=8631, mode='train'
     ghost_clusters=args.ghost_cluster
     bottleneck_dim=args.bottleneck_dim
     aggregation = args.aggregation_mode
-    mgpu = len(keras.backend.tensorflow_backend._get_available_gpus())
+    mgpu = len(tf.config.list_physical_devices()) #K.tensorflow_backend._get_available_gpus())
 
     if net == 'resnet34s':
         inputs, x = backbone.resnet_2D_v1(input_dim=input_dim, mode=mode)
